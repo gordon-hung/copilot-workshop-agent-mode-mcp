@@ -9,6 +9,7 @@ const emptyMessage = document.querySelector("#empty-message");
 const remainingCount = document.querySelector("#remaining-count");
 const themeToggle = document.querySelector("#theme-toggle");
 const filterButtons = document.querySelectorAll(".filter-button");
+const clearCompletedButton = document.querySelector("#clear-completed-button");
 const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
 let currentFilter = "all";
@@ -133,7 +134,25 @@ function render() {
 
   const incompleteCount = todos.filter((todo) => !todo.completed).length;
   remainingCount.textContent = `未完成:${incompleteCount} 項`;
+
+  const hasCompletedTodos = todos.some((todo) => todo.completed);
+  clearCompletedButton.disabled = !hasCompletedTodos;
 }
+
+clearCompletedButton.addEventListener("click", () => {
+  if (!todos.some((todo) => todo.completed)) {
+    return;
+  }
+
+  // 刪除前確認，避免使用者誤刪不可復原的已完成事項
+  if (!window.confirm("確定要清除所有已完成的待辦事項嗎？")) {
+    return;
+  }
+
+  todos = todos.filter((todo) => !todo.completed);
+  saveTodos();
+  render();
+});
 
 todoForm.addEventListener("submit", (event) => {
   event.preventDefault();
