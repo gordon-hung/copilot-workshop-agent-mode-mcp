@@ -124,7 +124,7 @@ function render() {
   } else if (currentFilter === "active" && !todos.some((todo) => !todo.completed)) {
     emptyMessage.textContent = "目前沒有未完成的待辦事項。";
   } else if (currentFilter === "completed" && !todos.some((todo) => todo.completed)) {
-    emptyMessage.textContent = "目前沒有已完成的待辦事項。";
+    emptyMessage.textContent = "目前沒有已完成的事項。";
   } else {
     emptyMessage.textContent = "";
   }
