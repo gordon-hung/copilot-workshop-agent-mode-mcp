@@ -1,6 +1,7 @@
 // 儲存待辦事項的 localStorage 鍵名
 const STORAGE_KEY = "todo-items";
 const THEME_STORAGE_KEY = "todo-theme";
+const FILTER_STORAGE_KEY = "todo-filter";
 
 const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo-input");
@@ -12,7 +13,22 @@ const filterButtons = document.querySelectorAll(".filter-button");
 const clearCompletedButton = document.querySelector("#clear-completed-button");
 const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
-let currentFilter = "all";
+const validFilters = ["all", "active", "completed"];
+
+function loadFilter() {
+  const savedFilter = localStorage.getItem(FILTER_STORAGE_KEY);
+  return validFilters.includes(savedFilter) ? savedFilter : "all";
+}
+
+let currentFilter = loadFilter();
+
+function updateFilterButtons() {
+  filterButtons.forEach((button) => {
+    const isActive = button.dataset.filter === currentFilter;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
 
 // 套用深淺色主題並同步切換按鈕文字
 function applyTheme(theme) {
@@ -178,15 +194,11 @@ todoForm.addEventListener("submit", (event) => {
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     currentFilter = button.dataset.filter;
-
-    filterButtons.forEach((filterButton) => {
-      const isActive = filterButton === button;
-      filterButton.classList.toggle("active", isActive);
-      filterButton.setAttribute("aria-pressed", String(isActive));
-    });
-
+    localStorage.setItem(FILTER_STORAGE_KEY, currentFilter);
+    updateFilterButtons();
     render();
   });
 });
 
+updateFilterButtons();
 render();
