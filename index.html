@@ -8,7 +8,10 @@
 </head>
 <body>
   <main class="todo-card">
-    <h1>待辦清單</h1>
+    <header class="app-header">
+      <h1>待辦清單</h1>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="切換深淺色模式"></button>
+    </header>
 
     <form class="todo-form" id="todo-form">
       <label class="sr-only" for="todo-input">新增待辦事項</label>
@@ -21,6 +24,12 @@
       >
       <button type="submit">新增</button>
     </form>
+
+    <div class="filters" aria-label="待辦事項篩選">
+      <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" class="filter-button" data-filter="active" aria-pressed="false">未完成</button>
+      <button type="button" class="filter-button" data-filter="completed" aria-pressed="false">已完成</button>
+    </div>
 
     <ul class="todo-list" id="todo-list"></ul>
     <p class="empty-message" id="empty-message">還沒有任何待辦事項,新增一個吧!</p>
