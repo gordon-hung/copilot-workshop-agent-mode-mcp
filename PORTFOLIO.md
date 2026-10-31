@@ -7,7 +7,7 @@
 
 ## 線上展示
 
-- [開啟線上版本](https://<你的帳號>.github.io/<你的repo名稱>/)
+- [開啟線上版本](https://gordon-hung.github.io/copilot-workshop-agent-mode-mcp/)
 
 ## 功能
 
