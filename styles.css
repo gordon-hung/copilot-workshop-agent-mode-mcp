@@ -5,11 +5,13 @@
   --color-muted: #7a869a;
   --color-border: #dfe5ee;
   --color-input-background: #ffffff;
+  --color-button-text: #ffffff;
   --color-primary: #4f46e5;
   --color-primary-hover: #4338ca;
   --color-delete: #dc2626;
   --color-delete-hover: #b91c1c;
   --color-shadow: rgba(31, 41, 55, 0.12);
+  --color-disabled: #9ca3af;
 }
 
 :root[data-theme="dark"] {
@@ -19,11 +21,13 @@
   --color-muted: #9ca3af;
   --color-border: #374151;
   --color-input-background: #111827;
+  --color-button-text: #ffffff;
   --color-primary: #818cf8;
   --color-primary-hover: #6366f1;
   --color-delete: #ef4444;
   --color-delete-hover: #dc2626;
   --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-disabled: #6b7280;
 }
 
 * {
@@ -200,7 +204,29 @@ h1 {
 .todo-footer {
   margin-top: 18px;
   color: var(--color-muted);
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.clear-completed-button {
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--color-button-text);
+  background: var(--color-delete);
+  cursor: pointer;
+}
+
+.clear-completed-button:hover:not(:disabled) {
+  background: var(--color-delete-hover);
+}
+
+.clear-completed-button:disabled {
+  background: var(--color-disabled);
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 .sr-only {
